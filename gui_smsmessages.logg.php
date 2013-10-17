@@ -40,7 +40,7 @@ while($r = mysql_fetch_assoc($res)){
 		<div class="time"><?= utf8_encode($r['pl_name'])?></div>
 		<div class="action"><?= abs($r['t_credits'])?> credits</div>
 		<div class="user"><?= $r['mottakere']?></div>
-		<div class="message"><?= utf8_decode($r['t_comment'])?></div>
+		<div class="message"><?= utf8_encode($r['t_comment'])?></div>
 		<div class="clear"></div>
 	</li>
 <?php
