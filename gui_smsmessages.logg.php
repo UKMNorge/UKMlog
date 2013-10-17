@@ -22,7 +22,7 @@ $m = new monstring($plid);
 	<div id="icon-edit-pages">
 		<img src="<?= UKMN_ico('mobile', 32,false)?>" style="float: left; margin-top: 10px; margin-right: 10px;" width="32" />
 	</div>
-	<h2>Status SMS-meldinger</h2>
+	<h2>Status SMS-meldinger <?= $blog_id!=1 ? $m->g('pl_name') : '' ?></h2>
 </div>
 
 <ul class="log">
