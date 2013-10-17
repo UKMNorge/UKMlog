@@ -10,7 +10,7 @@ $qry = new SQL("SELECT
 				FROM `log_sms_transactions` AS `trans`
 				JOIN `smartukm_place` AS `place` ON (`place`.`pl_id` = `trans`.`pl_id`)
 				WHERE `t_action` = 'sendte_sms_for' "
-				.($blog_id != 1 ? "WHERE `place`.`pl_id` = '#pl_id'" : "")
+				.($blog_id != 1 ? "AND `place`.`pl_id` = '#pl_id'" : "")
 				."ORDER BY `t_id` DESC
 				LIMIT 250",
 				array('pl_id' => get_option('pl_id')));
@@ -22,8 +22,7 @@ $m = new monstring($plid);
 	<div id="icon-edit-pages">
 		<img src="<?= UKMN_ico('mobile', 32,false)?>" style="float: left; margin-top: 10px; margin-right: 10px;" width="32" />
 	</div>
-	<h2>Status SMS-meldinger/h2>
-	<p>Viser siste 250 meldinger</p>
+	<h2>Status SMS-meldinger</h2>
 </div>
 
 <ul class="log">
@@ -47,3 +46,4 @@ while($r = mysql_fetch_assoc($res)){
 <?php
 }
 ?></ul>
+(Viser inntil 250 siste meldinger)
