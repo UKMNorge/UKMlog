@@ -1,4 +1,5 @@
 <?php
+global $blog_id;
 $qry = new SQL("SELECT 
 					SUM(`t_credits`) AS `credits`,
 					`pl_name`,
@@ -31,9 +32,11 @@ $qry = new SQL("SELECT
 					) AS `refunderte`
 					
 				FROM `log_sms_transactions` AS `trans`
-				JOIN `smartukm_place` AS `place` ON (`place`.`pl_id` = `trans`.`pl_id`)
-				GROUP BY `place`.`pl_id`
-				ORDER BY `credits` ASC");
+				JOIN `smartukm_place` AS `place` ON (`place`.`pl_id` = `trans`.`pl_id`) "
+				.($blog_id != 1 ? "WHERE `place`.`pl_id` = '#pl_id'" : "")
+			."	GROUP BY `place`.`pl_id`
+				ORDER BY `credits` ASC",
+				array('pl_id' => get_option('pl_id')));
 $res = $qry->run();
 $m = new monstring($plid);
 ?>
