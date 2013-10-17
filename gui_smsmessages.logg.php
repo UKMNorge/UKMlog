@@ -1,4 +1,5 @@
 <?php
+global $blog_id;
 $qry = new SQL("SELECT 
 					`pl_name`,
 					`t_comment`,
@@ -8,9 +9,11 @@ $qry = new SQL("SELECT
 							WHERE `t1`.`t_id` = `trans`.`t_id`) AS `mottakere`
 				FROM `log_sms_transactions` AS `trans`
 				JOIN `smartukm_place` AS `place` ON (`place`.`pl_id` = `trans`.`pl_id`)
-				WHERE `t_action` = 'sendte_sms_for'
-				ORDER BY `t_id` DESC
-				LIMIT 250");
+				WHERE `t_action` = 'sendte_sms_for' "
+				.($blog_id != 1 ? "WHERE `place`.`pl_id` = '#pl_id'" : "")
+				."ORDER BY `t_id` DESC
+				LIMIT 250",
+				array('pl_id' => get_option('pl_id')));
 $res = $qry->run();
 $m = new monstring($plid);
 ?>
