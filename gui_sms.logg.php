@@ -38,7 +38,7 @@ $qry = new SQL("SELECT
 				ORDER BY `credits` ASC",
 				array('pl_id' => get_option('pl_id')));
 $res = $qry->run();
-$m = new monstring($plid);
+$m = new monstring(get_option('pl_id'));
 ?>
 
 <div class="wrap">
