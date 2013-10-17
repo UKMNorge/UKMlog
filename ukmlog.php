@@ -37,7 +37,7 @@ function UKMlog_scripts_and_styles(){
 function UKMlog_gui() {
 	$place = new monstring(get_option('pl_id'));
 
-	echo '<h3>Logg for '.$place->g('name').'</h3>';
+	echo '<h3>Logg for '.$place->g('pl_name').'</h3>';
 
 	$logg = new SQL("SELECT `log_id` FROM `log_log`	
 					WHERE `log_pl_id` = '#plid'

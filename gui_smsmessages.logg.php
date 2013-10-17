@@ -9,7 +9,8 @@ $qry = new SQL("SELECT
 				FROM `log_sms_transactions` AS `trans`
 				JOIN `smartukm_place` AS `place` ON (`place`.`pl_id` = `trans`.`pl_id`)
 				WHERE `t_action` = 'sendte_sms_for'
-				ORDER BY `t_id` DESC");
+				ORDER BY `t_id` DESC
+				LIMIT 250");
 $res = $qry->run();
 $m = new monstring($plid);
 ?>
@@ -18,7 +19,8 @@ $m = new monstring($plid);
 	<div id="icon-edit-pages">
 		<img src="<?= UKMN_ico('mobile', 32,false)?>" style="float: left; margin-top: 10px; margin-right: 10px;" width="32" />
 	</div>
-	<h2>Status SMS-credits</h2>
+	<h2>Status SMS-meldinger/h2>
+	<p>Viser siste 250 meldinger</p>
 </div>
 
 <ul class="log">
