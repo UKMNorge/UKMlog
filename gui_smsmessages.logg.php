@@ -15,7 +15,7 @@ $qry = new SQL("SELECT
 				LIMIT 250",
 				array('pl_id' => get_option('pl_id')));
 $res = $qry->run();
-$m = new monstring($plid);
+$m = new monstring(get_option('pl_id'));
 ?>
 
 <div class="wrap">
