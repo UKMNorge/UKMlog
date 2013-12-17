@@ -15,18 +15,20 @@ require_once('UKM/inc/ukmlog.inc.php');
 
 ## HOOK MENU AND SCRIPTS
 if(is_admin()) {
-	add_action('admin_menu', 'UKMlog_menu',207);
+	add_action('UKM_admin_menu', 'UKMlog_menu');
 }
 
 ## CREATE A MENU
 function UKMlog_menu() {
-	add_menu_page('Logg', 'Logg', 'superadmin', 'UKMlog_gui', 'UKMlog_gui', 'http://ico.ukm.no/log-menu.png',501);
-	$page = add_submenu_page('UKMlog_gui', 'Rapporter', 'Rapporter', 'superadmin', 'UKMlog_rapport_statistikk','UKMlog_rapport_statistikk');
-	add_action( 'admin_print_styles-' . $page, 'UKMlog_scripts_and_styles' );
-	$page = add_submenu_page('UKMlog_gui', 'SMS-credits', 'SMS-credits', 'superadmin', 'UKMlog_sms','UKMlog_sms');
-	add_action( 'admin_print_styles-' . $page, 'UKMlog_scripts_and_styles' );
-	$page = add_submenu_page('UKMlog_gui', 'SMS-meldinger', 'SMS-meldinger', 'superadmin', 'UKMlog_smsmessages','UKMlog_smsmessages');
-	add_action( 'admin_print_styles-' . $page, 'UKMlog_scripts_and_styles' );
+	UKM_add_menu_page('norge', 'Logg', 'Logg', 'superadmin', 'UKMlog_gui', 'UKMlog_gui', 'http://ico.ukm.no/log-menu.png',5);
+	UKM_add_submenu_page('UKMlog_gui', 'Rapporter', 'Rapporter', 'superadmin', 'UKMlog_rapport_statistikk','UKMlog_rapport_statistikk');
+	UKM_add_submenu_page('UKMlog_gui', 'SMS-credits', 'SMS-credits', 'superadmin', 'UKMlog_sms','UKMlog_sms');
+	UKM_add_submenu_page('UKMlog_gui', 'SMS-meldinger', 'SMS-meldinger', 'superadmin', 'UKMlog_smsmessages','UKMlog_smsmessages');
+
+	UKM_add_scripts_and_styles('UKMlog_gui', 'UKMlog_scripts_and_styles' );
+	UKM_add_scripts_and_styles('UKMlog_rapport_statistikk', 'UKMlog_scripts_and_styles' );
+	UKM_add_scripts_and_styles('UKMlog_sms', 'UKMlog_scripts_and_styles' );
+	UKM_add_scripts_and_styles('UKMlog_smsmessages', 'UKMlog_scripts_and_styles' );
 }
 
 function UKMlog_scripts_and_styles(){
