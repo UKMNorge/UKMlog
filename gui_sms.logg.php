@@ -1,4 +1,6 @@
 <?php
+$SEASON = (int)get_option('season');
+$START = ($season-1).'-10-01 00:00:00';
 global $blog_id;
 $qry = new SQL("SELECT 
 					SUM(`t_credits`) AS `credits`,
@@ -7,18 +9,21 @@ $qry = new SQL("SELECT
 						SUM(`t_credits`) 
 						FROM `log_sms_transactions` AS `t1` 
 						WHERE `t1`.`pl_id` = `trans`.`pl_id`
+						AND `t_time` >= '#start'
 						AND `t1`.`t_action` = 'sendte_sms_for'
 					) AS `sendt`,
 					(SELECT 
 						COUNT(`t_id`) 
 						FROM `log_sms_transactions` AS `t2` 
 						WHERE `t2`.`pl_id` = `trans`.`pl_id`
+						AND `t_time` >= '#start'
 						AND `t2`.`t_action` = 'sendte_sms_for'
 					) AS `meldinger`,
 					(SELECT 
 						SUM(`t_credits`) 
 						FROM `log_sms_transactions` AS `t4` 
 						WHERE `t4`.`pl_id` = `trans`.`pl_id`
+						AND `t_time` >= '#start'
 						AND `t4`.`t_action` = 'mottok'
 						AND `t_credits` != '200'
 					) AS `refundert_credits`,
@@ -27,6 +32,7 @@ $qry = new SQL("SELECT
 						COUNT(`t_id`) 
 						FROM `log_sms_transactions` AS `t3` 
 						WHERE `t3`.`pl_id` = `trans`.`pl_id`
+						AND `t_time` >= '#start'
 						AND `t3`.`t_action` = 'mottok'
 						AND `t_credits` != '200'
 					) AS `refunderte`
@@ -34,7 +40,8 @@ $qry = new SQL("SELECT
 				FROM `log_sms_transactions` AS `trans`
 				JOIN `smartukm_place` AS `place` ON (`place`.`pl_id` = `trans`.`pl_id`) "
 				.($blog_id != 1 ? "WHERE `place`.`pl_id` = '#pl_id'" : "")
-			."	GROUP BY `place`.`pl_id`
+			."	WHERE `t_time` >= '#start'
+				GROUP BY `place`.`pl_id`
 				ORDER BY `credits` ASC",
 				array('pl_id' => get_option('pl_id')));
 $res = $qry->run();
