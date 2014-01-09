@@ -1,6 +1,6 @@
 <?php
 $SEASON = (int)get_option('season');
-$START = ($season-1).'-10-01 00:00:00';
+$START = ($SEASON-1).'-10-01 00:00:00';
 global $blog_id;
 $qry = new SQL("SELECT 
 					SUM(`t_credits`) AS `credits`,
