@@ -43,7 +43,7 @@ $qry = new SQL("SELECT
 			."	WHERE `t_time` >= '#start'
 				GROUP BY `place`.`pl_id`
 				ORDER BY `credits` ASC",
-				array('pl_id' => get_option('pl_id')));
+				array('pl_id' => get_option('pl_id'), 'start' => $START));
 $res = $qry->run();
 echo $qry->debug();
 $m = new monstring(get_option('pl_id'));
