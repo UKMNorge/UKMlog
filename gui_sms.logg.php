@@ -2,41 +2,41 @@
 $SEASON = (int)get_option('season');
 $START = ($SEASON-1).'-10-01 00:00:00';
 global $blog_id;
-$qry = new SQL("SELECT 
+$qry = new SQL("SELECT
 					SUM(`t_credits`) AS `credits`,
 					`pl_name`,
-					(SELECT 
-						SUM(`t_credits`) 
-						FROM `log_sms_transactions` AS `t1` 
+					(SELECT
+						SUM(`t_credits`)
+						FROM `log_sms_transactions` AS `t1`
 						WHERE `t1`.`pl_id` = `trans`.`pl_id`
 						AND `t_time` >= '#start'
 						AND `t1`.`t_action` = 'sendte_sms_for'
 					) AS `sendt`,
-					(SELECT 
-						COUNT(`t_id`) 
-						FROM `log_sms_transactions` AS `t2` 
+					(SELECT
+						COUNT(`t_id`)
+						FROM `log_sms_transactions` AS `t2`
 						WHERE `t2`.`pl_id` = `trans`.`pl_id`
 						AND `t_time` >= '#start'
 						AND `t2`.`t_action` = 'sendte_sms_for'
 					) AS `meldinger`,
-					(SELECT 
-						SUM(`t_credits`) 
-						FROM `log_sms_transactions` AS `t4` 
+					(SELECT
+						SUM(`t_credits`)
+						FROM `log_sms_transactions` AS `t4`
 						WHERE `t4`.`pl_id` = `trans`.`pl_id`
 						AND `t_time` >= '#start'
 						AND `t4`.`t_action` = 'mottok'
 						AND `t_credits` != '200'
 					) AS `refundert_credits`,
 
-					(SELECT 
-						COUNT(`t_id`) 
-						FROM `log_sms_transactions` AS `t3` 
+					(SELECT
+						COUNT(`t_id`)
+						FROM `log_sms_transactions` AS `t3`
 						WHERE `t3`.`pl_id` = `trans`.`pl_id`
 						AND `t_time` >= '#start'
 						AND `t3`.`t_action` = 'mottok'
 						AND `t_credits` != '200'
 					) AS `refunderte`
-					
+
 				FROM `log_sms_transactions` AS `trans`
 				JOIN `smartukm_place` AS `place` ON (`place`.`pl_id` = `trans`.`pl_id`) "
 				.($blog_id != 1 ? "WHERE `place`.`pl_id` = '#pl_id'" : "")
@@ -65,17 +65,19 @@ $m = new monstring(get_option('pl_id'));
 
 	</li>
 <?php
-while($r = mysql_fetch_assoc($res)){
-	$m = new monstring($r['pl_id']);
-?>
-	<li class="trans">
-		<div class="time"><?= utf8_encode($r['pl_name'])?></div>
-		<div class="action"><?= $r['credits']?></div>
-		<div class="user"><?= abs($r['sendt'])?></div>
-		<div class="user"><?= $r['refundert_credits']?> credits, <?= $r['refunderte']?> mottakere</div>
-		<div class="user"><?= $r['meldinger']?></div>
-		<div class="clear"></div>
-	</li>
-<?php
-}
+if ($res) {
+	while ( $r = mysql_fetch_assoc( $res ) ) {
+		$m = new monstring( $r['pl_id'] );
+		?>
+		<li class="trans">
+			<div class="time"><?= utf8_encode( $r['pl_name'] ) ?></div>
+			<div class="action"><?= $r['credits'] ?></div>
+			<div class="user"><?= abs( $r['sendt'] ) ?></div>
+			<div class="user"><?= $r['refundert_credits'] ?> credits, <?= $r['refunderte'] ?> mottakere</div>
+			<div class="user"><?= $r['meldinger'] ?></div>
+			<div class="clear"></div>
+		</li>
+	<?php
+	} // endwhile
+} // endif
 ?></ul>
