@@ -20,7 +20,7 @@ if(is_admin()) {
 
 ## CREATE A MENU
 function UKMlog_menu() {
-	UKM_add_menu_page('norge', 'Logg', 'Logg', 'superadmin', 'UKMlog_gui', 'UKMlog_gui', 'http://ico.ukm.no/log-menu.png',5);
+	UKM_add_menu_page('norge', 'Logg', 'Logg', 'administrator', 'UKMlog_gui', 'UKMlog_gui', 'http://ico.ukm.no/log-menu.png',5);
 	UKM_add_submenu_page('UKMlog_gui', 'Rapporter', 'Rapporter', 'superadmin', 'UKMlog_rapport_statistikk','UKMlog_rapport_statistikk');
 	UKM_add_submenu_page('UKMlog_gui', 'SMS-credits', 'SMS-credits', 'superadmin', 'UKMlog_sms','UKMlog_sms');
 	UKM_add_submenu_page('UKMlog_gui', 'SMS-meldinger', 'SMS-meldinger', 'superadmin', 'UKMlog_smsmessages','UKMlog_smsmessages');
