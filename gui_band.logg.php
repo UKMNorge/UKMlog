@@ -15,7 +15,7 @@ if (isset($_GET['b_id'])) {
 					AND 	`l`.`log_action` < 400
 					AND 	`l`.`log_pl_id` = '".$pl_id."'
 					AND 	`l`.`log_the_object_id` = '".$b_id."'
-					ORDER BY `l`.`log_time`
+					ORDER BY `l`.`log_time` DESC
 					;");	
 	$res = $qry->run();
 } else {
