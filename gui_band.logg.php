@@ -1,4 +1,11 @@
 <?php
+
+###
+# Logg-visning for innslag
+# Skrevet 12.02.2016 av Asgeir S. Hustad.
+# asgeirsh@ukmmedia.no
+###
+
 require_once('UKM/inc/ukmlog.inc.php');
 require_once('UKM/innslag.class.php');
 $pl_id = get_option('pl_id');
