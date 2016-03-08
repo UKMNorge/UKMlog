@@ -27,8 +27,6 @@ if ((isset($_GET['b_id']) && !empty($_GET['b_id'])) || (isset($_GET['action_id']
 					"`l`.`log_action` > 300 AND 	
 					 `l`.`log_action` < 400");
 	
-	#var_dump($action);
-	#var_dump($band);
 	$qry = new SQL("SELECT *
 					FROM `log_log` AS `l` 
 					LEFT JOIN `log_actions` AS `la` ON (`l`.`log_action` = `la`.`log_action_id`)
@@ -52,8 +50,6 @@ if ((isset($_GET['b_id']) && !empty($_GET['b_id'])) || (isset($_GET['action_id']
 				;");
 	$res = $qry->run();
 }
-#var_dump($res);
-// GROUP BY `l`.`log_the_object_id`
 ?>
 <div class="wrap">
 	<h3>Logg for innslag</h3>

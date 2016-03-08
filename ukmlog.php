@@ -24,7 +24,7 @@ function UKMlog_menu() {
 	UKM_add_submenu_page('UKMlog_gui', 'Rapporter', 'Rapporter', 'superadmin', 'UKMlog_rapport_statistikk','UKMlog_rapport_statistikk');
 	UKM_add_submenu_page('UKMlog_gui', 'SMS-credits', 'SMS-credits', 'superadmin', 'UKMlog_sms','UKMlog_sms');
 	UKM_add_submenu_page('UKMlog_gui', 'SMS-meldinger', 'SMS-meldinger', 'superadmin', 'UKMlog_smsmessages','UKMlog_smsmessages');
-	UKM_add_submenu_page('UKMlog_gui', 'Innslag', 'Innslag', 'superadmin', 'UKMlog_band', 'UKMlog_band');
+	UKM_add_submenu_page('UKMlog_gui', 'Innslag', 'Innslag', 'editor', 'UKMlog_band', 'UKMlog_band');
 
 	UKM_add_scripts_and_styles('UKMlog_gui', 'UKMlog_scripts_and_styles' );
 	UKM_add_scripts_and_styles('UKMlog_rapport_statistikk', 'UKMlog_scripts_and_styles' );
