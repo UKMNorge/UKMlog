@@ -4,37 +4,43 @@ $lokal = new SQL("SELECT
 (SELECT COUNT(`f_id`) 
 	FROM `log_rapporter_format` AS `t1` 
 	WHERE `t1`.`f_rapport` = `rapport` 
+	AND `t1`.`f_season` = '#season'
 	AND `t1`.`f_pl_id` = '#plid' 
 	AND `t1`.`f_type` = 'skjerm') AS `skjerm`,
 (SELECT COUNT(`f_id`) 
 	FROM `log_rapporter_format` AS `t2` 
 	WHERE `t2`.`f_rapport` = `rapport` 
+	AND `t2`.`f_season` = '#season'
 	AND `t2`.`f_pl_id` = '#plid' 
 	AND `t2`.`f_type` = 'word') AS `word`,
 (SELECT COUNT(`f_id`) 
 	FROM `log_rapporter_format` AS `t3` 
 	WHERE `t3`.`f_rapport` = `rapport` 
+	AND `t3`.`f_season` = '#season'
 	AND `t3`.`f_pl_id` = '#plid' 
 	AND `t3`.`f_type` = 'excel') AS `excel`,
 (SELECT COUNT(`f_id`) 
 	FROM `log_rapporter_format` AS `t4` 
 	WHERE `t4`.`f_rapport` = `rapport` 
+	AND `t4`.`f_season` = '#season'
 	AND `t4`.`f_pl_id` = '#plid' 
 	AND `t4`.`f_type` = 'print') AS `print`,
 (SELECT COUNT(`f_id`) 
 	FROM `log_rapporter_format` AS `t5` 
 	WHERE `t5`.`f_rapport` = `rapport` 
+	AND `t5`.`f_season` = '#season'
 	AND `t5`.`f_pl_id` = '#plid' 
 	AND `t5`.`f_type` = 'mail') AS `mail`,
 (SELECT COUNT(`f_id`) 
 	FROM `log_rapporter_format` AS `t6` 
 	WHERE `t6`.`f_rapport` = `rapport` 
+	AND `t6`.`f_season` = '#season'
 	AND `t6`.`f_pl_id` = '#plid' 
 	AND `t6`.`f_type` = 'sms') AS `sms` 
 FROM `log_rapporter_format` 
 WHERE `f_pl_id` = '#plid' 
 GROUP BY `rapport`",
-				array('plid'=>get_option('pl_id')));
+				array('plid'=>get_option('pl_id'), 'season' => get_option('season') ));
 $lokal = $lokal->run();
 
 $nasjonalt = new SQL("SELECT
@@ -42,37 +48,42 @@ $nasjonalt = new SQL("SELECT
 (SELECT COUNT(`f_id`) 
 	FROM `log_rapporter_format` AS `t1` 
 	WHERE `t1`.`f_rapport` = `rapport` 
+	AND `t1`.`f_season` = '#season'
 	AND `t1`.`f_pl_id` != '#plid' 
 	AND `t1`.`f_type` = 'skjerm') AS `skjerm`,
 (SELECT COUNT(`f_id`) 
 	FROM `log_rapporter_format` AS `t2` 
 	WHERE `t2`.`f_rapport` = `rapport` 
+	AND `t2`.`f_season` = '#season'
 	AND `t2`.`f_pl_id` != '#plid' 
 	AND `t2`.`f_type` = 'word') AS `word`,
 (SELECT COUNT(`f_id`) 
 	FROM `log_rapporter_format` AS `t3` 
 	WHERE `t3`.`f_rapport` = `rapport` 
+	AND `t3`.`f_season` = '#season'
 	AND `t3`.`f_pl_id` != '#plid' 
 	AND `t3`.`f_type` = 'excel') AS `excel`,
 (SELECT COUNT(`f_id`) 
 	FROM `log_rapporter_format` AS `t4` 
 	WHERE `t4`.`f_rapport` = `rapport` 
+	AND `t4`.`f_season` = '#season'
 	AND `t4`.`f_pl_id` != '#plid' 
 	AND `t4`.`f_type` = 'print') AS `print`,
 (SELECT COUNT(`f_id`) 
 	FROM `log_rapporter_format` AS `t5` 
 	WHERE `t5`.`f_rapport` = `rapport` 
+	AND `t5`.`f_season` = '#season'
 	AND `t5`.`f_pl_id` != '#plid' 
 	AND `t5`.`f_type` = 'mail') AS `mail`,
 (SELECT COUNT(`f_id`) 
 	FROM `log_rapporter_format` AS `t6` 
 	WHERE `t6`.`f_rapport` = `rapport` 
+	AND `t6`.`f_season` = '#season'
 	AND `t6`.`f_pl_id` != '#plid' 
 	AND `t6`.`f_type` = 'sms') AS `sms` 
 FROM `log_rapporter_format` 
-WHERE `f_pl_id` != '#plid' 
 GROUP BY `rapport`",
-				array('plid'=>get_option('pl_id')));
+				array('plid'=>get_option('pl_id'), 'season' => get_option('season') ));
 $nasjonalt = $nasjonalt->run();
 ?>
 
