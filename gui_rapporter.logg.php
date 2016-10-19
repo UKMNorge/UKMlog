@@ -1,4 +1,12 @@
 <?php
+
+if( isset($_GET['year']) && is_numeric($_GET['year']) ) {
+	$sesong = $_GET['year'];
+}
+else {
+	$sesong = get_option('season');
+}
+
 $lokal = new SQL("SELECT
 `f_rapport` AS `rapport`,
 (SELECT COUNT(`f_id`) 
@@ -40,7 +48,7 @@ $lokal = new SQL("SELECT
 FROM `log_rapporter_format` 
 WHERE `f_pl_id` = '#plid' 
 GROUP BY `rapport`",
-				array('plid'=>get_option('pl_id'), 'season' => get_option('season') ));
+				array('plid'=>get_option('pl_id'), 'season' => $sesong ));
 $lokal = $lokal->run();
 
 $nasjonalt = new SQL("SELECT
@@ -83,7 +91,7 @@ $nasjonalt = new SQL("SELECT
 	AND `t6`.`f_type` = 'sms') AS `sms` 
 FROM `log_rapporter_format` 
 GROUP BY `rapport`",
-				array('plid'=>get_option('pl_id'), 'season' => get_option('season') ));
+				array('plid'=>get_option('pl_id'), 'season' => $sesong ));
 $nasjonalt = $nasjonalt->run();
 ?>
 
