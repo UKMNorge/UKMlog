@@ -90,7 +90,7 @@ if ((isset($_GET['b_id']) && !empty($_GET['b_id'])) || (isset($_GET['action_id']
 
 
 	<?php
-		while($row = mysql_fetch_assoc($res)) {
+		while($row = SQL::fetch($res)) {
 			echo UKMlog_read($row['log_id']);
 		}
 	?>

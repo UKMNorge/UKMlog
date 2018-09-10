@@ -45,7 +45,7 @@ function UKMlog_gui() {
 				array('plid'=>$place->g('pl_id')));
 
 	$logg = $logg->run();
-	while($row = mysql_fetch_assoc($logg)){
+	while($row = SQL::fetch($logg)){
 		echo UKMlog_read($row['log_id']);
 	}
 }

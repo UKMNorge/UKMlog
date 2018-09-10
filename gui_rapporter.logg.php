@@ -113,7 +113,7 @@ $nasjonalt = $nasjonalt->run();
 		<div class="sms">Send SMS</div>
 	</li>
 <?php 
-while($r = mysql_fetch_assoc($lokal)){ ?>
+while($r = SQL::fetch($lokal)){ ?>
 	<li class="rapport">
 		<div class="rapport"><?= $r['rapport']?></div>
 		<div class="skjerm"><?= $r['skjerm']?></div>
@@ -138,7 +138,7 @@ while($r = mysql_fetch_assoc($lokal)){ ?>
 		<div class="sms">Send SMS</div>
 	</li>
 <?php 
-while($r = mysql_fetch_assoc($nasjonalt)){ ?>
+while($r = SQL::fetch($nasjonalt)){ ?>
 	<li class="rapport">
 		<div class="rapport"><?= $r['rapport']?></div>
 		<div class="skjerm"><?= $r['skjerm']?></div>
