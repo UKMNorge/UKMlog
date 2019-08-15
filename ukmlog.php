@@ -15,18 +15,38 @@ require_once('UKM/inc/ukmlog.inc.php');
 
 ## HOOK MENU AND SCRIPTS
 if(is_admin()) {
-	add_action('UKM_admin_menu', 'UKMlog_menu');
+	add_action('admin_menu', 'UKMlog_menu', 400);
 }
 
 ## CREATE A MENU
 function UKMlog_menu() {
-	UKM_add_menu_page('norge', 'Logg', 'Logg', 'editor', 'UKMlog_gui', 'UKMlog_gui', '//ico.ukm.no/log-menu.png',5);
-	UKM_add_submenu_page('UKMlog_gui', 'Innslag', 'Innslag', 'editor', 'UKMlog_band', 'UKMlog_band');
-	#UKM_add_submenu_page('UKMlog_gui', 'Rapporter', 'Rapporter', 'superadmin', 'UKMlog_rapport_statistikk','UKMlog_rapport_statistikk');
 
-	UKM_add_scripts_and_styles('UKMlog_gui', 'UKMlog_scripts_and_styles' );
-	#UKM_add_scripts_and_styles('UKMlog_rapport_statistikk', 'UKMlog_scripts_and_styles' );
-	UKM_add_scripts_and_styles('UKMlog_band', 'UKMlog_scripts_and_styles' );
+	$page_log = add_submenu_page(
+		'UKMmonstring',
+		'Logg',
+		'Logg',
+		'editor',
+		'UKMlog_gui',
+		'UKMlog_gui'
+	);
+	
+	$page_log_innslag = add_submenu_page(
+		'UKMmonstring',
+		'Logg for innslag',
+		'Logg for innslag',
+		'editor',
+		'UKMlog_band',
+		'UKMlog_band'
+	);
+
+	add_action(
+		'admin_print_styles-' . $page_log,
+		'UKMlog_scripts_and_styles'
+	);
+	add_action(
+		'admin_print_styles-' . $page_log_innslag,
+		'UKMlog_scripts_and_styles'
+	);
 }
 
 function UKMlog_scripts_and_styles(){
