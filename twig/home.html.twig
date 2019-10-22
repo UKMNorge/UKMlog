@@ -1,0 +1,85 @@
+<h1>Logg for
+    {{ element.getNavn() }}
+</h1>
+
+
+<p>&nbsp;</p>
+<form method="GET" class="form-inline">
+    <input type="hidden" name="page" value="{{GET('page')}}"/>
+    <div class="form-group">
+        <label for="searchForBID">Søk etter et innslag:</label>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" name="b_id" placeholder="Innslag-ID..." value="{{GET('b_id')}}" id="searchForBID"/>
+    </div>
+    <button type="submit" value="Søk" class="btn btn-primary">Søk</button>
+    {% if searching is defined and searching %}
+        <a href="?page={{GET('page')}}" class="btn btn-xs btn-default" style="margin-left:1em;">lukk søk</a>
+    {% endif %}
+
+</form>
+
+
+<p>&nbsp;</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Tidspunkt
+                <br/>
+                <small>
+                    BrukerID
+                </small>
+            </th>
+            <th style="vertical-align: top;">
+                Oppdatert element
+            </th>
+            <th>
+                Forklaring
+                <br/>
+                <small>HandlingID</small>
+            </th>
+            <th>
+                Ny verdi
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for event in element.getLog().getAll() %}
+            <tr>
+                <td>
+                    {{event.getTidspunkt()|dato('d.M.y H:i:s')}}
+                    <br/>
+                    <small>
+                        <b>{{event.getUser().getSystem() }}:</b>
+                        {{ event.getUser().getId() }}
+                    </small>
+                </td>
+                <td>
+                    {% if event.getType().getId() == 3 %}
+                        <a href="?page={{GET('page')}}&b_id={{event.getElement()}}">
+                        {% endif %}
+                        {{ event.getElement() }}
+                        {% if event.getType().getId() == 3 %}
+                        </a>
+                    {% endif %}
+                </td>
+                <td>
+                    {{event.getAction().getVerb() }}
+                    {{ event.getType().getNavn() }}
+                    {{ event.getAction().getElement() }}
+                    <br/>
+                    <small>
+                        <b>action:</b>
+                        {{ event.getAction().getId() }}
+                    </small>
+                </td>
+                <td>
+                    {{ event.getVerdi()|strips }}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
