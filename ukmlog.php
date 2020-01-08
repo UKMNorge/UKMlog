@@ -21,7 +21,7 @@ class UKMlog extends UKMNorge\Wordpress\Modul {
 
     public static function meny() {
         $page = add_submenu_page(
-            'UKMmonstring',
+			'index.php',
             'Logg',
             'Logg',
             'editor',
