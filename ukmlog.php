@@ -20,14 +20,16 @@ class UKMlog extends UKMNorge\Wordpress\Modul {
     }
 
     public static function meny() {
-        $page = add_submenu_page(
-			'index.php',
-            'Logg',
-            'Logg',
-            'editor',
-            'UKMlog',
-            ['UKMlog','renderAdmin']
-        );
+        if( get_option('pl_id') ) {
+            $page = add_submenu_page(
+                'index.php',
+                'Logg',
+                'Logg',
+                'editor',
+                'UKMlog',
+                ['UKMlog','renderAdmin']
+            );
+        }
 
         add_action(
             'admin_print_styles-' . $page,
