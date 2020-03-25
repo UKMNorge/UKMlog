@@ -1,5 +1,7 @@
 <?php
 
+use UKMNorge\Database\SQL\Query;
+
 if( isset($_GET['year']) && is_numeric($_GET['year']) ) {
 	$sesong = $_GET['year'];
 }
@@ -7,7 +9,7 @@ else {
 	$sesong = get_option('season');
 }
 
-$lokal = new SQL("SELECT
+$lokal = new Query("SELECT
 `f_rapport` AS `rapport`,
 (SELECT COUNT(`f_id`) 
 	FROM `log_rapporter_format` AS `t1` 
@@ -51,7 +53,7 @@ GROUP BY `rapport`",
 				array('plid'=>get_option('pl_id'), 'season' => $sesong ));
 $lokal = $lokal->run();
 
-$nasjonalt = new SQL("SELECT
+$nasjonalt = new Query("SELECT
 `f_rapport` AS `rapport`,
 (SELECT COUNT(`f_id`) 
 	FROM `log_rapporter_format` AS `t1` 
@@ -113,7 +115,7 @@ $nasjonalt = $nasjonalt->run();
 		<div class="sms">Send SMS</div>
 	</li>
 <?php 
-while($r = SQL::fetch($lokal)){ ?>
+while($r = Query::fetch($lokal)){ ?>
 	<li class="rapport">
 		<div class="rapport"><?= $r['rapport']?></div>
 		<div class="skjerm"><?= $r['skjerm']?></div>
@@ -138,7 +140,7 @@ while($r = SQL::fetch($lokal)){ ?>
 		<div class="sms">Send SMS</div>
 	</li>
 <?php 
-while($r = SQL::fetch($nasjonalt)){ ?>
+while($r = Query::fetch($nasjonalt)){ ?>
 	<li class="rapport">
 		<div class="rapport"><?= $r['rapport']?></div>
 		<div class="skjerm"><?= $r['skjerm']?></div>
