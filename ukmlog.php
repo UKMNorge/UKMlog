@@ -22,7 +22,7 @@ class UKMlog extends UKMNorge\Wordpress\Modul {
     public static function meny() {
         if( get_option('pl_id') ) {
             $page = add_submenu_page(
-                'index.php',
+                'users.php',
                 'Logg',
                 'Logg',
                 'editor',
